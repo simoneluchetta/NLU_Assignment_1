@@ -32,4 +32,24 @@ def task_1(text):
     
 
 task_1(text)
+print("End of task one...")
 
+
+def task_2(text):
+    doc = nlp(text)
+    subtreeList = []
+    for tokens in doc:
+        subtree = [t.text for t in tokens.subtree]
+        subtree = "/t".join(subtree)
+        subtreeList.append(subtree.split("/t"))
+    for n in range(len(subtreeList)):
+        print(subtreeList[n])
+    # Optionally, one could even return the subtree or the subtreeList
+    # return subtreeList
+    # return subtree
+            
+
+task_2(text)
+print("End of task two...")
+
+#######################################################################################################
