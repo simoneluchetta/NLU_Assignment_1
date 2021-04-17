@@ -106,6 +106,7 @@ def task_5(text):
     for tokens in doc:
 
         if(tokens.dep_ == "subj"):
+        if(tokens.dep_ == "nsubj" or tokens.dep_ == "csubj"):
             subtree = [t.text for t in tokens.subtree]
             subtree = " ".join(subtree)
             subjList.append(subtree)
