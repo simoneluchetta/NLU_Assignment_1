@@ -53,3 +53,78 @@ task_2(text)
 print("End of task two...")
 
 #######################################################################################################
+
+match = "with a telescope"
+
+
+def Convert(string):
+    li = list(string.split(" "))
+    return li
+
+
+def task_3(text, match):
+    doc = nlp(text)
+    matchList = Convert(match)
+    subtreeList = []
+    matchList.sort()
+    for tokens in doc:
+        subtree = [t.text for t in tokens.subtree]
+        subtree = "/t".join(subtree)
+        subtreeList.append(subtree.split("/t"))
+    for n in range(len(subtreeList)):
+        subtreeList[n].sort()
+        if(subtreeList[n] == matchList):
+            print("Match found...")
+            return True
+    print("Match not found...")
+    return False
+
+
+task_3(text, match)
+print("End of task three")
+
+#######################################################################################################
+
+def task_4(wordseq, startOfSpan, endOfSpan):
+    doc = nlp(wordseq)
+    span = doc[startOfSpan:endOfSpan]
+    return span.root.text
+
+
+# I saw the man with a telescope.
+print(task_4(text, 2, (len(text)+1)))
+print(task_4(text, 0, (len(text)+1)))
+print("End of task four...")
+
+#######################################################################################################
+
+def task_5(text):
+    doc = nlp(text)
+    subjList = []
+    dobjList = []
+    iobjList = []
+    for tokens in doc:
+
+        if(tokens.dep_ == "subj"):
+            subtree = [t.text for t in tokens.subtree]
+            subtree = " ".join(subtree)
+            subjList.append(subtree)
+
+        if(tokens.dep_ == "dobj"):
+            subtree = [t.text for t in tokens.subtree]
+            subtree = " ".join(subtree)
+            dobjList.append(subtree)
+
+        if(tokens.dep_ == "iobj"):
+            subtree = [t.text for t in tokens.subtree]
+            subtree = " ".join(subtree)
+            iobjList.append(subtree)
+
+    dictionary = {"subj": subjList, "dobj": dobjList, "iobj": iobjList}
+    print(dictionary)
+
+
+task_5(text)
+print("End of task five...")
+
+#######################################################################################################
