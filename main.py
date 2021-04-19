@@ -1,7 +1,7 @@
-# Simone Luchetta
+# Simone Luchetta, Student ID: 223716
 # First assignment
 
-#Basic imports
+# Basic imports
 import spacy
 import nltk
 import copy
@@ -16,6 +16,8 @@ nlp = spacy.load("en_core_web_sm")
 
 text = "I saw the man with a telescope."
 
+#######################################################################################################
+
 def task_1(text):
     doc = nlp(text)
     for tokens in doc:
@@ -23,17 +25,20 @@ def task_1(text):
         if(tokens.dep_ != "ROOT"):
             dummyTokens = tokens
             while(dummyTokens.dep_ != "ROOT"):
-                pathsContainer.append(dummyTokens.dep_ + "-->" + dummyTokens.text)
+                pathsContainer.append(
+                    dummyTokens.dep_ + "-->" + dummyTokens.text)
                 dummyTokens = dummyTokens.head
                 if(dummyTokens.dep_ == "ROOT"):
-                    pathsContainer.append("--> Root: " + dummyTokens.dep_ + "-->" + dummyTokens.text)
+                    pathsContainer.append(
+                        "--> Root: " + dummyTokens.dep_ + "-->" + dummyTokens.text)
             pathsContainer.reverse()
             print(pathsContainer)
-    
+
 
 task_1(text)
 print("End of task one...")
 
+#######################################################################################################
 
 def task_2(text):
     doc = nlp(text)
@@ -47,7 +52,7 @@ def task_2(text):
     # Optionally, one could even return the subtree or the subtreeList
     # return subtreeList
     # return subtree
-            
+
 
 task_2(text)
 print("End of task two...")
@@ -105,7 +110,6 @@ def task_5(text):
     iobjList = []
     for tokens in doc:
 
-        if(tokens.dep_ == "subj"):
         if(tokens.dep_ == "nsubj" or tokens.dep_ == "csubj"):
             subtree = [t.text for t in tokens.subtree]
             subtree = " ".join(subtree)
@@ -123,6 +127,7 @@ def task_5(text):
 
     dictionary = {"subj": subjList, "dobj": dobjList, "iobj": iobjList}
     print(dictionary)
+    # return dictionary
 
 
 task_5(text)
